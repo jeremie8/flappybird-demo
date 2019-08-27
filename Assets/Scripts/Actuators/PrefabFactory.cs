@@ -14,9 +14,9 @@ namespace Actuators
         
         public GameObject CreatePipePair(Vector3 position, Quaternion rotation, GameObject parent)
         {
-            var gameobject_dumbVarName = Instantiate(pipePairPrefab, position, rotation);
-            if (parent != null) gameobject_dumbVarName.transform.parent = parent.transform;
-            return gameobject_dumbVarName;
+            var pipePair = Instantiate(pipePairPrefab, position, rotation);
+            if (parent != null) pipePair.transform.parent = parent.transform;
+            return pipePair;
         }
     }
 }
