@@ -8,14 +8,15 @@ namespace Actuators
 {
     public class PipeSpawnPoint : MonoBehaviour
     {
-        [SerializeField] private GameObject pipePrefab;
         [SerializeField] private int spawnDelay = 3;
 
         private GameController gameController;
+        private PrefabFactory prefabFactory;
 
         private void Awake()
         {
             gameController = Finder<GameController>.Find;
+            prefabFactory = Finder<PrefabFactory>.Find;
         }
 
         private void OnEnable()
@@ -28,9 +29,9 @@ namespace Actuators
             while (true)
             {
                 yield return new WaitForSeconds(spawnDelay);
-                
-                if(gameController.GameState != GameState.MainMenu)
-                    Instantiate(pipePrefab, transform.position, Quaternion.identity);
+
+                if (gameController.GameState != GameState.MainMenu)
+                    prefabFactory.CreatePipePair(transform.position, Quaternion.identity, null);
             }
         }
     }
